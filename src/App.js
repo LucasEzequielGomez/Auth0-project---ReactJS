@@ -1,24 +1,27 @@
 import React from "react";
 
-import { LoginButton } from './Login';
-import { Profile } from './Profile';
-import { LogoutButton } from './Logout';
-import logo from "./logo.svg"
+import LoginButton from './components/LoginButton';
+import LogoutButton from './components/LogoutButton';
+import Profile from './components/Profile';
+
 // styles
 import "./App.css";
+
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 
 function App () {
+
+  const {isAuthenticated} = useAuth0()
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-Logo" alt="logo" />
-        <LoginButton />
+        
+        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         <Profile/>
-        <LogoutButton />
       </header>
-
     </div>
   )
 }
